@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Workflow {
+public class WorkflowDTO {
 
 	private Long id;
 	
