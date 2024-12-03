@@ -11,7 +11,7 @@ import com.example.taskflow_system.response.ApiResponse;
 
 public interface TaskService {
 
-	ApiResponse<List<TaskDTO>> getAllTasks();
+	ApiResponse<Page<TaskDTO>> getAllTasks(Pageable pageable);
 
 	ApiResponse<TaskDTO> getTaskById(Long id);
 

@@ -37,10 +37,9 @@ public class TaskServiceImpl implements TaskService {
 	private ModelMapper mapper;
 
 	@Override
-	public ApiResponse<List<TaskDTO>> getAllTasks() {
-		List<Task> tasks = taskRepository.findAll();
-		List<TaskDTO> tasksDTO = tasks.stream().map(task -> mapper.map(task, TaskDTO.class))
-				.collect(Collectors.toList());
+	public ApiResponse<Page<TaskDTO>> getAllTasks(Pageable pageable) {
+		Page<Task> tasks = taskRepository.findAll(pageable);
+		Page<TaskDTO> tasksDTO = tasks.map(task -> mapper.map(task, TaskDTO.class));
 		return new ApiResponse<>(Constant.TASK_RETRIEVED_SUCCESS, true, tasksDTO);
 	}
 
