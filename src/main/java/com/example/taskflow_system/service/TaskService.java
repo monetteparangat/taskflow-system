@@ -11,15 +11,15 @@ import com.example.taskflow_system.response.ApiResponse;
 
 public interface TaskService {
 
-	List<TaskDTO> getAllTasks();
+	ApiResponse<List<TaskDTO>> getAllTasks();
 
-	TaskDTO getTaskById(Long id);
+	ApiResponse<TaskDTO> getTaskById(Long id);
 
 	ApiResponse<TaskDTO> createTask(TaskDTO task);
 
 	ApiResponse<TaskDTO> updateTask(Long id, TaskDTO taskDTO);
 
-	ApiResponse<TaskDTO> deleteTaskById(Long id);
+	ApiResponse<Void> deleteTaskById(Long id);
 
 	void changeStatus(Long id, Status status);
 

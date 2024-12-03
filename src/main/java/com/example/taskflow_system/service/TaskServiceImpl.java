@@ -37,19 +37,19 @@ public class TaskServiceImpl implements TaskService {
 	private ModelMapper mapper;
 
 	@Override
-	public List<TaskDTO> getAllTasks() {
+	public ApiResponse<List<TaskDTO>> getAllTasks() {
 		List<Task> tasks = taskRepository.findAll();
 		List<TaskDTO> tasksDTO = tasks.stream().map(task -> mapper.map(task, TaskDTO.class))
 				.collect(Collectors.toList());
-		return tasksDTO;
+		return new ApiResponse<>(Constant.TASK_RETRIEVED_SUCCESS, true, tasksDTO);
 	}
 
 	@Override
-	public TaskDTO getTaskById(Long id) {
+	public ApiResponse<TaskDTO> getTaskById(Long id) {
 		Task task = taskRepository.findById(id)
 				.orElseThrow(() -> new TaskNotFoundException(String.format(Constant.TASK_NOT_FOUND, id)));
 		TaskDTO taskDTO = mapper.map(task, TaskDTO.class);
-		return taskDTO;
+		return new ApiResponse<>(Constant.TASK_RETRIEVED_SUCCESS, true, taskDTO);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public ApiResponse<TaskDTO> deleteTaskById(Long id) {
+	public ApiResponse<Void> deleteTaskById(Long id) {
 		Boolean isExists = taskRepository.existsById(id);
 		if (!isExists) {
 			return new ApiResponse<>(String.format(Constant.TASK_NOT_FOUND, id), false);

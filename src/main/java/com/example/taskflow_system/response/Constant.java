@@ -4,6 +4,7 @@ public class Constant {
 
 	//	TASK MESSAGE
 	public static final String TASK_NOT_FOUND = "Task with ID %d not found";
+	public static final String TASK_RETRIEVED_SUCCESS = "Tasks retrieved successfully";
 	public static final String TASK_DELETED_SUCCESS = "Task with ID %d deleted successfully";
 	public static final String TASK_UPDATED_SUCCESS = "Task with ID %d updated successfuly";
 	public static final String TASK_UPDATED_FAILED = "Task with ID %d could not be updated";
