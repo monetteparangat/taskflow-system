@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.example.taskflow_system.dto.TaskDTO;
+import com.example.taskflow_system.model.Task;
 import com.example.taskflow_system.model.enums.Status;
 import com.example.taskflow_system.response.ApiResponse;
 
@@ -21,7 +22,7 @@ public interface TaskService {
 
 	ApiResponse<Void> deleteTaskById(Long id);
 
-	void changeStatus(Long id, Status status);
+	ApiResponse<Void> changeStatus(Long id, Status status);
 
 	ApiResponse<Page<TaskDTO>> getTasksByUser(Long userId, Pageable pageable);
 
@@ -29,7 +30,7 @@ public interface TaskService {
 
 	ApiResponse<Page<TaskDTO>> getTasksByStatus(Status status, Pageable pageable);
 
-	void setStartDateIfInProgress(Long taskId);
+	void setStartDateIfInProgress(Task task);
 
-	void setEndDateIfCompleted(Long taskId);
+	void setEndDateIfCompleted(Task task);
 }

@@ -116,13 +116,14 @@ public class TaskServiceImpl implements TaskService {
 
 	}
 
-	public void changeStatus(Long id, Status status) {
+	public ApiResponse<Void> changeStatus(Long id, Status status) {
 		Task task = taskRepository.findById(id)
 				.orElseThrow(() -> new TaskNotFoundException(String.format(Constant.TASK_NOT_FOUND, id)));
 		task.setStatus(status);
 		setStartDateIfInProgress(task);
 		setEndDateIfCompleted(task);
 		taskRepository.save(task);
+		return new ApiResponse<>(String.format(Constant.TASK_STATUS_UPDATE_SUCCESS, status), true);
 	}
 
 	public ApiResponse<Page<TaskDTO>> getTasksByUser(Long userId, Pageable pageable) {

@@ -10,6 +10,7 @@ public class Constant {
 	public static final String TASK_UPDATED_FAILED = "Task with ID %d could not be updated";
 	public static final String TASK_SAVED_SUCCESS = "Task saved successfully";
 	public static final String TASK_SAVED_FAILED = "Task with ID %d already exists";
+	public static final String TASK_STATUS_UPDATE_SUCCESS = "Task status udpated to %s successfully";
     public static final String USERS_TASKS_NOT_FOUND = "No tasks found for user with ID %d";
     public static final String USERS_TASKS_RETRIEVED = "Tasks retrieved successfully for user with ID %d";
     public static final String WORKFLOWS_TASKS_NOT_FOUND = "No tasks found for workflow with ID %d";
