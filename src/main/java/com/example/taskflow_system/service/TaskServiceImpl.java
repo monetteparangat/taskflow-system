@@ -91,8 +91,8 @@ public class TaskServiceImpl implements TaskService {
 		existingTask.setWorkflow(workflow);
 
 		if (existingTask.getStatus() != taskDTO.getStatus()) {
-			setStartDateIfInProgress(id);
-			setEndDateIfCompleted(id);
+			setStartDateIfInProgress(existingTask);
+			setEndDateIfCompleted(existingTask);
 		}
 
 		Task updatedTask = taskRepository.save(existingTask);
@@ -120,6 +120,8 @@ public class TaskServiceImpl implements TaskService {
 		Task task = taskRepository.findById(id)
 				.orElseThrow(() -> new TaskNotFoundException(String.format(Constant.TASK_NOT_FOUND, id)));
 		task.setStatus(status);
+		setStartDateIfInProgress(task);
+		setEndDateIfCompleted(task);
 		taskRepository.save(task);
 	}
 
@@ -156,20 +158,14 @@ public class TaskServiceImpl implements TaskService {
 		return new ApiResponse<>(String.format(Constant.STATUS_TASKS_RETRIEVED, status), true, tasksPageDTO);
 	}
 
-	public void setStartDateIfInProgress(Long taskId) {
-		Task task = taskRepository.findById(taskId)
-				.orElseThrow(() -> new TaskNotFoundException(Constant.TASK_NOT_FOUND));
-
+	public void setStartDateIfInProgress(Task task) {
 		if (task.getStatus().equals(Status.IN_PROGRESS) && task.getStartDate() == null) {
 			task.setStartDate(LocalDateTime.now());
 			taskRepository.save(task);
 		}
 	}
 
-	public void setEndDateIfCompleted(Long taskId) {
-		Task task = taskRepository.findById(taskId)
-				.orElseThrow(() -> new TaskNotFoundException(Constant.TASK_NOT_FOUND));
-
+	public void setEndDateIfCompleted(Task task) {
 		if (task.getStatus().equals(Status.COMPLETED) && task.getEndDate() == null) {
 			task.setEndDate(LocalDateTime.now());
 			taskRepository.save(task);
