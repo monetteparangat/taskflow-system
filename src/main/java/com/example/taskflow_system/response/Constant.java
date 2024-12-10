@@ -20,6 +20,8 @@ public class Constant {
 
 	
 	//USER MESSAGE
+    public static final String USER_RETRIEVED_SUCCESS = "Users retrieved successfully";
+    public static final String USER_RETRIEVED_FAILED = "Failed to retrieved users";
 	public static final String USER_NOT_FOUND = "User with ID %d not found";
 	public static final String USER_EXISTS = "User wth ID %d retrieved";
 	
