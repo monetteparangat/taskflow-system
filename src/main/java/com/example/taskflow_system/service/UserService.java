@@ -9,4 +9,6 @@ import com.example.taskflow_system.response.ApiResponse;
 public interface UserService {
 
 	ApiResponse<Page<UserDTO>> getAllUsers(Pageable pageable);
+
+	ApiResponse<UserDTO> getUserById(Long id);
 }
