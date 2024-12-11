@@ -50,5 +50,7 @@ public class UserServiceImpl implements UserService {
 		logger.info("End getUserById at Service: Successfully retrieved user with ID: {}", id);
 		return new ApiResponse<>(String.format(Constant.USER_EXISTS, id), true, userDTO);
 	}
+	
+	
 
 }
