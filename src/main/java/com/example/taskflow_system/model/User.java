@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -42,6 +41,5 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	private List<Task> task;
-	 
 
 }

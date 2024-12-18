@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.taskflow_system.dto.UserDTO;
-import com.example.taskflow_system.exception.UserNotFoundException;
 import com.example.taskflow_system.model.User;
 import com.example.taskflow_system.repository.UserRepository;
 import com.example.taskflow_system.response.ApiResponse;
@@ -50,7 +49,23 @@ public class UserServiceImpl implements UserService {
 		logger.info("End getUserById at Service: Successfully retrieved user with ID: {}", id);
 		return new ApiResponse<>(String.format(Constant.USER_EXISTS, id), true, userDTO);
 	}
-	
-	
+
+	public ApiResponse<UserDTO> createUser(UserDTO userDTO) {
+		logger.info("Start createUser at Service");
+		User createUser = mapper.map(userDTO, User.class);
+
+		Long userId = createUser.getId();
+		String email = createUser.getEmail();
+		Boolean isEmailExists = userRepository.existsByEmail(email);
+
+		if ((userId != null && userRepository.existsById(userId)) || isEmailExists) {
+			logger.warn("User already with ID {} or Email {} already exists", userId, email);
+			return new ApiResponse<>(String.format(Constant.USER_ALREADY_EXISTS, userId), false, null);
+		}
+
+		createUser = userRepository.save(createUser);
+		UserDTO createdUserDTO = mapper.map(createUser, UserDTO.class);
+		return new ApiResponse<>(Constant.USER_SAVED_SUCCESS, true, createdUserDTO);
+	}
 
 }

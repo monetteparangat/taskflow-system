@@ -15,8 +15,12 @@ public class UserDTO {
 	@NotNull
 	private String name;
 	@Email
+	@NotNull
 	private String email;
 
+	@NotNull
+	private String password;
+
 	private Long roleId;
-	
+
 }
