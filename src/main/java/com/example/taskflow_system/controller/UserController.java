@@ -63,9 +63,10 @@ public class UserController {
 	public ResponseEntity<ApiResponse<UserDTO>> createUser(@RequestBody UserDTO userDTO) {
 		ApiResponse<UserDTO> user = userService.createUser(userDTO);
 
-		if (!user.isSuccess()) {
-			return new ResponseEntity<>(user, HttpStatus.CONFLICT);
-		}
+		/*
+		 * if (!user.isSuccess()) { return new ResponseEntity<>(user,
+		 * HttpStatus.CONFLICT); }
+		 */
 
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}

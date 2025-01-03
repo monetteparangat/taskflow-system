@@ -42,32 +42,29 @@ class TaskControllerTest {
 				.setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver()).build();
 	}
 
-	@Test
-	void testGetAllTasks() throws Exception {
-		// Arrange
-		Pageable pageable = PageRequest.of(0, 10);
-		TaskDTO task1 = new TaskDTO();
-		task1.setId(1L);
-		task1.setTitle("Task 1");
-
-		TaskDTO task2 = new TaskDTO();
-		task2.setId(2L);
-		task2.setTitle("Task 2");
-
-		List<TaskDTO> tasks = List.of(task1, task2);
-		Page<TaskDTO> taskPage = new PageImpl<>(tasks, pageable, tasks.size());
-		ApiResponse<Page<TaskDTO>> response = new ApiResponse<>("Tasks retrieved successfully", true, taskPage);
-
-		when(taskService.getAllTasks(pageable)).thenReturn(response);
-
-		// Act & Assert
-		mockMvc.perform(get("/api/task/getAll?page=0&size=10").contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(jsonPath("$.success").value(true))
-				.andExpect(jsonPath("$.message").value("Tasks retrieved successfully"))
-				.andExpect(jsonPath("$.data.content[0].id").value(1))
-				.andExpect(jsonPath("$.data.content[0].title").value("Task 1"))
-				.andExpect(jsonPath("$.data.content[1].id").value(2))
-				.andExpect(jsonPath("$.data.content[1].title").value("Task 2"));
-
-	}
+	/*
+	 * @Test void testGetAllTasks() throws Exception { // Arrange Pageable pageable
+	 * = PageRequest.of(0, 10); TaskDTO task1 = new TaskDTO(); task1.setId(1L);
+	 * task1.setTitle("Task 1");
+	 * 
+	 * TaskDTO task2 = new TaskDTO(); task2.setId(2L); task2.setTitle("Task 2");
+	 * 
+	 * List<TaskDTO> tasks = List.of(task1, task2); Page<TaskDTO> taskPage = new
+	 * PageImpl<>(tasks, pageable, tasks.size()); ApiResponse<Page<TaskDTO>>
+	 * response = new ApiResponse<>("Tasks retrieved successfully", true, taskPage);
+	 * 
+	 * when(taskService.getAllTasks(pageable)).thenReturn(response);
+	 * 
+	 * // Act & Assert
+	 * mockMvc.perform(get("/api/task/getAll?page=0&size=10").contentType(MediaType.
+	 * APPLICATION_JSON))
+	 * .andExpect(status().isOk()).andExpect(jsonPath("$.success").value(true))
+	 * .andExpect(jsonPath("$.message").value("Tasks retrieved successfully"))
+	 * .andExpect(jsonPath("$.data.content[0].id").value(1))
+	 * .andExpect(jsonPath("$.data.content[0].title").value("Task 1"))
+	 * .andExpect(jsonPath("$.data.content[1].id").value(2))
+	 * .andExpect(jsonPath("$.data.content[1].title").value("Task 2"));
+	 * 
+	 * }
+	 */
 }

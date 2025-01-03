@@ -24,7 +24,6 @@ import com.example.taskflow_system.response.Constant;
 
 import java.time.LocalDateTime;
 
-
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -44,7 +43,7 @@ public class TaskServiceImpl implements TaskService {
 		Page<Task> tasks = taskRepository.findAll(pageable);
 		Page<TaskDTO> tasksDTO = tasks.map(task -> mapper.map(task, TaskDTO.class));
 		logger.info("End getAllTasks at Service");
-		return new ApiResponse<>(Constant.TASK_RETRIEVED_SUCCESS, true, tasksDTO);
+		return new ApiResponse<Page<TaskDTO>>(Constant.TASK_RETRIEVED_SUCCESS, true, tasksDTO);
 	}
 
 	@Override
