@@ -35,3 +35,18 @@ build/
 # .gitignore
 .env
 application.properties
+
+*.class
+.gitattributes
+.location
+*.lock
+*.log
+*.zip
+dialog_settings.xml
+*.ini
+*.ser
+*.tree
+*.core
+*.indexes
+*.intro
+bin
